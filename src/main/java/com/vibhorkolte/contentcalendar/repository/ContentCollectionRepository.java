@@ -28,6 +28,11 @@ public class ContentCollectionRepository {
 		return content.stream().filter(v -> v.id().equals(id)).findFirst();	// findFirst() returns Optional<>
 	}
 	
+	public void save(Content content) {
+		this.content.removeIf(c -> c.id().equals(content.id()));
+		this.content.add(content);
+	}
+	
 	// Tells spring to run this method after the dependency injection is done.
 	@PostConstruct
 	private void init() {
@@ -36,5 +41,13 @@ public class ContentCollectionRepository {
 		
 		content.add(c);
 		
+	}
+
+	public boolean existsById(Integer id) {
+		return content.stream().filter(v -> v.id().equals(id)).count() == 1;
+	}
+
+	public void delete(Integer id) {
+		this.content.removeIf(c -> c.id().equals(id));		
 	}
 }
