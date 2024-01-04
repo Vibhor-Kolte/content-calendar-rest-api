@@ -46,4 +46,8 @@ public class ContentCollectionRepository {
 	public boolean existsById(Integer id) {
 		return content.stream().filter(v -> v.id().equals(id)).count() == 1;
 	}
+
+	public void delete(Integer id) {
+		this.content.removeIf(c -> c.id().equals(id));		
+	}
 }
