@@ -29,6 +29,7 @@ public class ContentCollectionRepository {
 	}
 	
 	public void save(Content content) {
+		this.content.removeIf(c -> c.id().equals(content.id()));
 		this.content.add(content);
 	}
 	
