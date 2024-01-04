@@ -1,7 +1,12 @@
 package com.vibhorkolte.contentcalendar.controller;
 
+import com.vibhorkolte.contentcalendar.model.Content;
 import com.vibhorkolte.contentcalendar.repository.ContentCollectionRepository;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +27,11 @@ public class ContentController {
 		this.repository = repository;
 	}
 	
+	// Make a request and find all content in the system
+	@GetMapping("")
+	public List<Content> findAll(){
+		return repository.findAll();
+	}
 	
 
 }
