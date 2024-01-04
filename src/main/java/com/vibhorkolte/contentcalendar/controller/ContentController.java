@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,6 +32,12 @@ public class ContentController {
 	@GetMapping("")
 	public List<Content> findAll(){
 		return repository.findAll();
+	}
+	
+	// Make a request and find a content by ID.
+	@GetMapping("/{id}")	// {} dynamic placeholder
+	public Optional<Content> findById(@PathVariable Integer id){
+		return repository.findById(id);
 	}
 	
 
