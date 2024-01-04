@@ -13,7 +13,7 @@ public class ContentCollectionRepository {
 	
 	private final List<Content> content = new ArrayList<>();
 	
-	ContentCollectionRepository (){}
+	public ContentCollectionRepository (){}
 	
 	public List<Content> findAll(){
 		return content;
