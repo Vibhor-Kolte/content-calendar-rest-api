@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -33,7 +34,7 @@ public class ContentController {
 	}
 	
 	// Make a request and find all content in the system
-	@GetMapping("")
+	@GetMapping("/all")
 	public List<Content> findAll(){
 		return repository.findAll();
 	}
@@ -45,8 +46,17 @@ public class ContentController {
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found"));
 	}
 	
-	@PostMapping("")
+	@PostMapping("/create")
 	public void create(@RequestBody Content content) {		
+		repository.save(content);
+	}
+	
+	@PutMapping("/update/{id}")
+	public void update(@RequestBody Content content, @PathVariable Integer id) {
+		if(!repository.existsById(id)) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found");
+		}
+		
 		repository.save(content);
 	}
 	
